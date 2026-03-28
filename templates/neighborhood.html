@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GO Term Neighbourhood</title>
+</head>
+<body>
+    <h1>GO Term Neighbourhood Analysis</h1>
+
+    <form method="post">
+        <label for="go_id">GO Term ID:</label>
+        <input
+            type="text"
+            id="go_id"
+            name="go_id"
+            value="{{ go_id }}"
+            placeholder="GO:0000001 or 0000001"
+            required
+        >
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if result %}
+        <h2>Result</h2>
+        <p><strong>GO ID:</strong> {{ result.go_id }}</p>
+        <p><strong>Name:</strong> {{ result.name }}</p>
+        <p><strong>Namespace:</strong> {{ result.namespace }}</p>
+
+        <p><strong>Parents:</strong></p>
+        {% if result.parents %}
+            <ul>
+                {% for parent in result.parents %}
+                    <li>{{ parent }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No parents found.</p>
+        {% endif %}
+
+        <p><strong>Children:</strong></p>
+        {% if result.children %}
+            <ul>
+                {% for child in result.children %}
+                    <li>{{ child }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No children found.</p>
+        {% endif %}
+
+        <p><strong>Parent Count:</strong> {{ result.parent_count }}</p>
+        <p><strong>Child Count:</strong> {{ result.child_count }}</p>
+        <p><strong>Neighbourhood Size:</strong> {{ result.neighborhood_size }}</p>
+
+    {% elif go_id %}
+        <p>Term not found.</p>
+    {% endif %}
+
+    <br>
+    <a href="/">Back to Home</a>
+</body>
+</html>

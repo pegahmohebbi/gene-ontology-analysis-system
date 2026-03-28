@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gene Similarity</title>
+</head>
+<body>
+    <h1>Gene Similarity</h1>
+
+    <form method="post">
+        <div>
+            <label for="gene1">Gene 1:</label>
+            <input type="text" id="gene1" name="gene1" value="{{ gene1 }}" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="gene2">Gene 2:</label>
+            <input type="text" id="gene2" name="gene2" value="{{ gene2 }}" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="metric">Similarity Metric:</label>
+            <select id="metric" name="metric">
+                <option value="jaccard" {% if metric == "jaccard" %}selected{% endif %}>Jaccard</option>
+                <option value="cosine" {% if metric == "cosine" %}selected{% endif %}>Cosine</option>
+            </select>
+        </div>
+
+        <br>
+
+        <button type="submit">Compute Similarity</button>
+    </form>
+
+    {% if score is not none %}
+        <h2>Result</h2>
+        <p><strong>Gene 1:</strong> {{ gene1 }}</p>
+        <p><strong>Gene 2:</strong> {{ gene2 }}</p>
+        <p><strong>Metric:</strong> {{ metric }}</p>
+        <p><strong>Similarity Score:</strong> {{ score }}</p>
+    {% endif %}
+
+    <br>
+    <a href="/">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Gene Ontology Statistics</h1>
+
+    <h2>Summary</h2>
+    <p><strong>Total GO Terms:</strong> {{ stats.total_go_terms }}</p>
+    <p><strong>Total Annotations:</strong> {{ stats.total_annotations }}</p>
+
+    <h2>Namespace Counts</h2>
+    <ul>
+        <li><strong>Biological Process:</strong> {{ stats.namespace_counts.biological_process }}</li>
+        <li><strong>Molecular Function:</strong> {{ stats.namespace_counts.molecular_function }}</li>
+        <li><strong>Cellular Component:</strong> {{ stats.namespace_counts.cellular_component }}</li>
+    </ul>
+
+    <h2>Namespace Distribution Chart</h2>
+    <canvas id="namespaceChart" width="600" height="300"></canvas>
+
+    <script>
+        const ctx = document.getElementById('namespaceChart').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Biological Process', 'Molecular Function', 'Cellular Component'],
+                datasets: [{
+                    label: 'Number of GO Terms',
+                    data: [
+                        {{ stats.namespace_counts.biological_process }},
+                        {{ stats.namespace_counts.molecular_function }},
+                        {{ stats.namespace_counts.cellular_component }}
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+    <br>
+    <a href="/">Back to Home</a>
+</body>
+</html>

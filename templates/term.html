@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GO Term Search</title>
+</head>
+<body>
+    <h1>GO Term Search</h1>
+
+    <form method="post">
+        <label>GO ID:</label>
+        <input type="text" name="go_id" value="{{ go_id }}">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if term %}
+        <h2>Result</h2>
+        <p><strong>ID:</strong> {{ term.id }}</p>
+        <p><strong>Name:</strong> {{ term.name }}</p>
+        <p><strong>Namespace:</strong> {{ term.namespace }}</p>
+        <p><strong>Definition:</strong> {{ term.definition }}</p>
+        <p><strong>Parents:</strong> {{ term.get_parents() }}</p>
+        <p><strong>Children:</strong> {{ term.get_children() }}</p>
+    {% endif %}
+
+    <p><a href="/">Back Home</a></p>
+</body>
+</html>

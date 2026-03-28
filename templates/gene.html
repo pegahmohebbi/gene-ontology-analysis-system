@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gene Search</title>
+</head>
+<body>
+    <h1>Gene Search</h1>
+
+    <form method="post">
+        <label>Gene Symbol:</label>
+        <input type="text" name="gene_symbol" value="{{ gene_symbol }}">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if terms is not none %}
+        <h2>GO Terms for {{ gene_symbol }}</h2>
+        <p>{{ terms }}</p>
+    {% endif %}
+
+    <p><a href="/">Back Home</a></p>
+</body>
+</html>
